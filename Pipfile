@@ -9,6 +9,10 @@ pillow = "*"
 djangorestframework = "*"
 gunicorn = "~=20.0.4"
 whitenoise = "~=5.2.0"
+psycopg2-binary = "*"
+dj-database-url = "*"
+django-rest-auth = "*"
+django-allauth = "*"
 
 [dev-packages]
 
