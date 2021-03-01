@@ -7,6 +7,8 @@ name = "pypi"
 django = "*"
 pillow = "*"
 djangorestframework = "*"
+gunicorn = "~=20.0.4"
+whitenoise = "~=5.2.0"
 
 [dev-packages]
 
