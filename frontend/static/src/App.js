@@ -63,27 +63,27 @@ class App extends Component {
   render(){
 
 
-
-
-
-
-
-
     const logoutForm = (<form onSubmit={(e) => this.handleLogout(e, this.state)}>
           <input type="text" placeholder="username" name="username" value={this.state.username} onChange={this.handleInput}/>
           <button className="btn-primary" type="submit">Log Out</button>
           </form>)
 
-    const loggedInUserName = this.state.isLoggedIn === true ? <p>Hello, logged in person</p> : <p>Hello, NOT LOGGED IN GUEST</p>
 
 
       return (
-    <div className="App">
-    <p><Register /></p>
-    <p><Login /></p>
-    <p><Profile /></p>
-      {logoutForm}
-      {loggedInUserName}
+
+    <div className="container">
+    <div className="row headerbar">
+    <div className="col-8"><Login /></div>
+    <div className="col-2">{this.state.isLoggedIn === true ? <p>Welcome, logged in person!</p> : null}</div>
+    <div className="col-2">{logoutForm}</div>
+    </div>
+    <div className="row">
+    <div className="col-8">{this.state.isLoggedIn === false ? <Register /> : null}</div>
+    <div className="col-4">{this.state.isLoggedIn === true ? <><p>Welcome! Please make a profile to leave a comment.</p><Profile /></> : null}</div>
+
+
+    </div>
     </div>
   );
 }

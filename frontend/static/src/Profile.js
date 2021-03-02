@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import Cookies from 'js-cookie'
+import './App.css';
 
 class Profile extends Component {
   constructor (props){
@@ -25,6 +26,8 @@ async submitPhoto(e){
   let formData = new FormData();
   formData.append('profile_picture', this.state.profile_picture);
   formData.append('user', 1);
+
+  //I think the 1 above is what's interrupting the submission
 
 const options = {
   method: 'POST',
