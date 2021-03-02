@@ -16,7 +16,14 @@
 }
 input {
   background: transparent;
-  background-color: transparent;
+  background-color: transparent !important;
   box-shadow: 3px 3px 3px gray;
 
 }
+
+/* input:-internal-autofill-selected {
+  background: transparent !important;
+  background-color: transparent !important;
+  color: unset !important;
+
+} */

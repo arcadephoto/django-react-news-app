@@ -9,8 +9,7 @@ class Login extends Component {
           isLoggedIn: !!Cookies.get('Authorization'),
           username: "",
           email: "",
-          password1: "",
-          password2: "",
+          password: "",
         }
     this.handleInput = this.handleInput.bind(this);
     this.handleLogin = this.handleLogin.bind(this);

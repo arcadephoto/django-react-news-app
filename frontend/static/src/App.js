@@ -3,6 +3,7 @@ import Cookies from 'js-cookie';
 import Register from './Register'
 import Login from './Login'
 import Profile from './Profile'
+import Articles from './Articles'
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -81,9 +82,8 @@ class App extends Component {
     <div className="row">
     <div className="col-8">{this.state.isLoggedIn === false ? <Register /> : null}</div>
     <div className="col-4">{this.state.isLoggedIn === true ? <><p>Welcome! Please make a profile to leave a comment.</p><Profile /></> : null}</div>
-
-
     </div>
+    <div className="row"><Articles /></div>
     </div>
   );
 }
