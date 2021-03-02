@@ -14,6 +14,7 @@ class Profile extends Component {
         }
     this.handleInput = this.handleInput.bind(this);
     this.submitPhoto = this.submitPhoto.bind(this);
+    this.handleImage = this.handleImage.bind(this);
       }
 
 handleInput(event){
@@ -40,6 +41,25 @@ const options = {
 const response = await fetch('/profiles/', options);
 console.log(response);
 }
+
+handleImage(e){
+
+//this is taking the selected image from our decice and storing it in state
+let file = e.target.files[0]
+this.setState({profile_picture: file,})
+
+let reader = new FileReader()
+reader.onloadend = () => {
+  this.setState({
+    preview: reader.result
+  });
+}
+
+reader.readAsDataURL(file);
+}
+
+
+
 
 
       render(){
