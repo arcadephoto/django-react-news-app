@@ -15,6 +15,7 @@ class Profile extends Component {
     this.handleInput = this.handleInput.bind(this);
     this.submitPhoto = this.submitPhoto.bind(this);
     this.handleImage = this.handleImage.bind(this);
+    this.editPhoto = this.editPhoto.bind(this);
       }
 
 handleInput(event){
@@ -58,17 +59,35 @@ reader.onloadend = () => {
 reader.readAsDataURL(file);
 }
 
+async editPhoto(e){
+  e.preventDefault();
+
+  let formData = new FormData();
+  formData.append('profile_picture', this.state.profile_picture);
+  formData.append('user', 1);
+
+
+const options = {
+  method: 'PUT',
+  headers: {
+    'X-CSRFToken': Cookies.get('csrftoken'),
+  },
+  body: formData,
+}
+
+const response = await fetch('/profiles/images/', options);
+}
 
 
 
 
       render(){
 
-
 const photoSubmit = <form onSubmit={this.submitPhoto}>
   <input type="file" name="profile_picture" onChange={this.handleImage}/>
 {this.state.profile_picture && <img width="500" src={this.state.preview} alt="preview" />}
 <button type="submit">Save</button>
+{localStorage.user === this.props.username ? <button onClick={this.editPhoto}>Edit</button> : null}
 </form>
 
         return(

@@ -28,9 +28,11 @@ class Login extends Component {
     const handleError = (err) => console.warn(err);
     const response = await fetch('/rest-auth/login/', options);
     const data = await response.json().catch(handleError);
-
     if(data.key) {
     Cookies.set('Authorization', `Token ${data.key}`);
+    this.props.setUser(data.username)
+    localStorage.setItem("user", data.username)
+    this.setState({username: data.username})
     }
   }
 

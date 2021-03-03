@@ -22,6 +22,7 @@ class App extends Component {
     this.handleInput = this.handleInput.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
+    this.setUser = this.setUser.bind(this);
       }
 
 
@@ -42,7 +43,6 @@ class App extends Component {
 
     async handleLogout(e, obj){
     e.preventDefault();
-
     const options = {
         method: 'POST',
         headers: {
@@ -54,18 +54,19 @@ class App extends Component {
     const handleError = (err) => console.warn(err);
     const response = await fetch('/rest-auth/logout/', options);
     const data = await response.json().catch(handleError);
-
-    // if(data.key) {
     Cookies.remove('Authorization', `Token ${data.key}`);
-    // }
+    localStorage.clear()
+    this.setState({username: ""})
     }
 
+setUser(user){
+  this.setState({username: user})
+}
 
   render(){
 
 
     const logoutForm = (<form onSubmit={(e) => this.handleLogout(e, this.state)}>
-          <input type="text" placeholder="username" name="username" value={this.state.username} onChange={this.handleInput}/>
           <button className="btn-primary" type="submit">Log Out</button>
           </form>)
 
@@ -75,15 +76,15 @@ class App extends Component {
 
     <div className="container">
     <div className="row headerbar">
-    <div className="col-8"><Login /></div>
-    <div className="col-2">{this.state.isLoggedIn === true ? <p>Welcome, logged in person!</p> : null}</div>
-    <div className="col-2">{logoutForm}</div>
+    <div className="col-8">{!localStorage.user ? <Login setUser={this.setUser}/> : null}</div>
+    <div className="col-2">{localStorage.user ? <p>Welcome, {localStorage.user}!</p> : null}</div>
+    <div className="col-2">{localStorage.user ? logoutForm : null}</div>
     </div>
     <div className="row">
     <div className="col-8">{this.state.isLoggedIn === false ? <Register /> : null}</div>
-    <div className="col-4">{this.state.isLoggedIn === true ? <><p>Welcome! Please make a profile to leave a comment.</p><Profile /></> : null}</div>
+    <div className="col-4">{this.state.isLoggedIn === true ? <><p>Welcome! Please make a profile to leave a comment.</p><Profile username={this.state.username}/></> : null}</div>
     </div>
-    <div className="row"><Articles /></div>
+    <div className="row"><Articles username={this.state.username}/></div>
     </div>
   );
 }

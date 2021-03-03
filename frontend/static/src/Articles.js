@@ -9,23 +9,32 @@ class Articles extends Component {
           isLoggedIn: !!Cookies.get('Authorization'),
           data: [],
         }
+
+this.editArticle = this.editArticle.bind(this);
+
+
 }
 
+editArticle(){
+  console.log("Edit!")
+}
 
-  componentDidMount(){
-    fetch("/articles/")
-      .then(response => response.json())
-      .then(response => this.setState({data: response}));
-            }
+componentDidMount(){
+  fetch("/articles/")
+    .then(response => response.json())
+    .then(response => this.setState({data: response}));
+          }
+
+
 
       render(){
-
         console.log(this.state.data)
         const content = this.state.data.map((data) => (
-          <section key={data.id}>
+          <section className="card" key={data.id}>
           <h1>{data.title}</h1>
-          <p>By: {data.author}</p>
-          <p>{data.body}</p></section>
+          <p>By: {data.owner}</p>
+          <p>{data.body}</p>
+          {data.owner === localStorage.user ? <button onClick={this.editArticle}>Edit</button> : null}</section>
         ))
 
 
