@@ -8,15 +8,29 @@ class Articles extends Component {
         this.state = {
           isLoggedIn: !!Cookies.get('Authorization'),
           data: [],
+          text: "",
+          editText: "",
+          isEditing: false,
         }
 
 this.editArticle = this.editArticle.bind(this);
+this.handleInput = this.handleInput.bind(this);
+this.handleEdit = this.handleEdit.bind(this);
+this.finishEdit = this.finishEdit.bind(this);
 
 
 }
 
-editArticle(){
-  console.log("Edit!")
+editArticle(data){
+  this.setState({isEditing: true})
+  const body = data.body
+  this.setState({editText: body})
+}
+
+
+finishEdit(){
+  this.setState({text: this.state.editText})
+  this.setState({isEditing: false})
 }
 
 componentDidMount(){
@@ -25,21 +39,35 @@ componentDidMount(){
     .then(response => this.setState({data: response}));
           }
 
+handleInput(event){
+      this.setState({[event.target.name]: event.target.value});
+    }
 
+
+handleEdit(event) {
+if (event.keyCode === 13) {
+  this.setState({text: this.state.editText})
+  this.setState({
+    isEditing: false
+  });
+}
+}
 
       render(){
-        console.log(this.state.data)
         const content = this.state.data.map((data) => (
           <section className="card" key={data.id}>
           <h1>{data.title}</h1>
           <p>By: {data.owner}</p>
           <p>{data.body}</p>
-          {data.owner === localStorage.user ? <button onClick={this.editArticle}>Edit</button> : null}</section>
+          {data.owner === localStorage.user ? <button onClick={() => this.editArticle(data)}>Edit</button> : null}</section>
         ))
 
+        const editWindow = this.state.isEditing === true ? <p><textarea className="form-control" rows="5" type="text" name="editText" value={this.state.editText} onChange={this.handleInput}/><button onClick={this.finishEdit}>Finish Edit</button></p> : null
 
         return(
-          <div>{content}</div>
+          <div>{content}
+                {editWindow}
+              </div>
         );
         }
       }

@@ -29,7 +29,6 @@ async submitPhoto(e){
   formData.append('profile_picture', this.state.profile_picture);
   formData.append('user', 1);
 
-  //I think the 1 above is what's interrupting the submission
 
 const options = {
   method: 'POST',
@@ -39,8 +38,7 @@ const options = {
   body: formData,
 }
 
-const response = await fetch('/profiles/', options);
-console.log(response);
+await fetch('/profiles/', options);
 }
 
 handleImage(e){
@@ -75,7 +73,7 @@ const options = {
   body: formData,
 }
 
-const response = await fetch('/profiles/images/', options);
+await fetch('/profiles/images/', options);
 }
 
 
