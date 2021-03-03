@@ -11,6 +11,7 @@ class Articles extends Component {
           text: "",
           editText: "",
           isEditing: false,
+          edited: false,
         }
 
 this.editArticle = this.editArticle.bind(this);
@@ -28,8 +29,8 @@ editArticle(data){
 }
 
 
-finishEdit(){
-  this.setState({text: this.state.editText})
+finishEdit(data){
+  data.body = this.state.editText
   this.setState({isEditing: false})
 }
 
@@ -58,15 +59,16 @@ if (event.keyCode === 13) {
           <section className="card" key={data.id}>
           <h1>{data.title}</h1>
           <p>By: {data.owner}</p>
-          <p>{data.body}</p>
-          {data.owner === localStorage.user ? <button onClick={() => this.editArticle(data)}>Edit</button> : null}</section>
+          {this.state.edited === false ? <p>{data.body}</p> : <p>{this.state.id.body}</p>}
+          {data.owner === localStorage.user ? <button onClick={() => this.editArticle(data)}>Edit</button> : null}
+          {this.state.isEditing === true & data.owner === localStorage.user ? <p><textarea className="form-control" rows="5" type="text" name="editText" value={this.state.editText} onChange={this.handleInput}/><button onClick={()=> this.finishEdit(data)}>Finish Edit</button></p> : null}
+          </section>
         ))
 
-        const editWindow = this.state.isEditing === true ? <p><textarea className="form-control" rows="5" type="text" name="editText" value={this.state.editText} onChange={this.handleInput}/><button onClick={this.finishEdit}>Finish Edit</button></p> : null
+
 
         return(
           <div>{content}
-                {editWindow}
               </div>
         );
         }
