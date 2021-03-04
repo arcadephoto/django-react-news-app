@@ -1,9 +1,11 @@
 import React, {Component} from 'react'
+import {Route, Switch} from 'react-router-dom';
 import Cookies from 'js-cookie';
-import Register from './Register'
-import Login from './Login'
-import Profile from './Profile'
-import Articles from './Articles'
+import Register from './Register';
+import Login from './Login';
+import Profile from './Profile';
+import Articles from './Articles';
+import Nav from './Nav';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -85,6 +87,7 @@ setUser(user){
     <div className="col-4">{this.state.isLoggedIn === true ? <><p>Welcome! Please make a profile to leave a comment.</p><Profile username={this.state.username}/></> : null}</div>
     </div>
     <div className="row"><Articles username={this.state.username}/></div>
+
     </div>
   );
 }

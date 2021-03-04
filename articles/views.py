@@ -26,16 +26,13 @@ class ArticlesUpdateView(generics.RetrieveUpdateDestroyAPIView):
     #     serializer.save(owner=self.request.user)
 
 class DraftsListView(generics.ListAPIView):
-    # queryset = Article.objects.all()
-    # queryset = Article.objects.all()
     serializer_class = ArticleSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def get_queryset(self):
         queryset = Article.objects.all()
-        username = self.request.query_params.get('username', None)
-        if username is not None:
-            queryset = queryset.filter(owner=username)
+        queryset = queryset.filter(phasechoices='DR')
+        queryset = queryset.filter(owner=self.request.user)
         return queryset
 
 class DraftsEditView(generics.RetrieveUpdateAPIView):
@@ -43,9 +40,6 @@ class DraftsEditView(generics.RetrieveUpdateAPIView):
     serializer_class = ArticleSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly,
                       IsOwnerOrReadOnly]
-
-    # def perform_create(self, serializer):
-    #     serializer.save(owner=self.request.user)
 
 
 class DraftsSubmitView(generics.CreateAPIView):
