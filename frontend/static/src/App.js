@@ -6,6 +6,8 @@ import Login from './Login';
 import Profile from './Profile';
 import Articles from './Articles';
 import Nav from './Nav';
+import Drafts from './Drafts';
+import Archives from './Archives';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -84,10 +86,19 @@ setUser(user){
     </div>
     <div className="row">
     <div className="col-8">{this.state.isLoggedIn === false ? <Register /> : null}</div>
-    <div className="col-4">{this.state.isLoggedIn === true ? <><p>Welcome! Please make a profile to leave a comment.</p><Profile username={this.state.username}/></> : null}</div>
+    <div className="col-4"></div>
     </div>
-    <div className="row"><Articles username={this.state.username}/></div>
-
+    <div className="row"></div>
+    <div className="row"><Nav /></div>
+    <div className="row"></div>
+    <React.Fragment>
+    <Switch>
+      <Route path="/articles/edit/drafts/" component={Drafts}/>
+      <Route path="/articles/archives/" component={Archives}/>
+      <Route path="/articles/" component={Articles} />
+      <Route path="/profiles/" component={Profile}/>
+    </Switch>
+    </React.Fragment>
     </div>
   );
 }

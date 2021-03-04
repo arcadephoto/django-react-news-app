@@ -81,6 +81,7 @@ await fetch('/profiles/images/', options);
 
       render(){
 
+const profileLog = this.state.isLoggedIn === true ? <p>Welcome! Please make a profile to leave a comment.</p>: null
 const photoSubmit = <form onSubmit={this.submitPhoto}>
   <input type="file" name="profile_picture" onChange={this.handleImage}/>
 {this.state.profile_picture && <img width="500" src={this.state.preview} alt="preview" />}
@@ -90,6 +91,7 @@ const photoSubmit = <form onSubmit={this.submitPhoto}>
 
         return(
           <div>
+          {profileLog}
           {photoSubmit}</div>
         );
       }

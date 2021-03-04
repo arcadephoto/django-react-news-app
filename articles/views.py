@@ -1,6 +1,11 @@
 from django.shortcuts import render
 from rest_framework import generics, permissions
 
+# from django.contrib.auth.models import Permission, User
+# from django.contrib.admin.views.decorators import staff_member_required
+# from django.contrib.auth.decorators import user_passes_test
+# from django.http import HttpResponse
+
 from .models import Article
 from .serializers import ArticleSerializer
 
@@ -14,25 +19,23 @@ class ArticlesListView(generics.ListAPIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
-
-
 class ArticlesUpdateView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly,
                       IsOwnerOrReadOnly]
 
-    # def perform_create(self, serializer):
-    #     serializer.save(owner=self.request.user)
-
 class DraftsListView(generics.ListAPIView):
     serializer_class = ArticleSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def get_queryset(self):
+        # import pdbl pdb.set_trace()
         queryset = Article.objects.all()
-        queryset = queryset.filter(phasechoices='DR')
-        queryset = queryset.filter(owner=self.request.user)
+        if not self.request.user.is_staff:
+            queryset = queryset.filter(phasechoices='DR').filter(owner=self.request.user)
+        else:
+            queryset = queryset.filter(phasechoices='DR')
         return queryset
 
 class DraftsEditView(generics.RetrieveUpdateAPIView):
@@ -49,3 +52,12 @@ class DraftsSubmitView(generics.CreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
+
+class ArchivesListView(generics.ListAPIView):
+    serializer_class = ArticleSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    def get_queryset(self):
+        queryset = Article.objects.all()
+        queryset = queryset.filter(phasechoices='AR')
+        return queryset

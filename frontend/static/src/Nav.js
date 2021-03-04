@@ -6,10 +6,12 @@ function Nav(props) {
 
 
   return(
-    <ul>
-    <li><NavLink to="/rest-auth/registration">Register</NavLink></li>
-    <li><NavLink to="/articles/">Article</NavLink></li>
-    </ul>
+    <div className="navbar">
+    <NavLink to="/articles/">Articles</NavLink>
+    <NavLink to="/articles/archives/">Archives</NavLink>
+    <NavLink to="/articles/edit/drafts/">Drafts</NavLink>
+    <NavLink to="/profiles/">Profile</NavLink>
+    </div>
   );
 }
 
