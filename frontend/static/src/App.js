@@ -22,6 +22,7 @@ class App extends Component {
           password1: "",
           password2: "",
           profile_picture: "",
+          user: {},
         }
     this.handleInput = this.handleInput.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -64,14 +65,14 @@ class App extends Component {
     }
 
 setUser(user){
-  this.setState({username: user})
+  this.setState({username: user.username})
 }
 
   render(){
 
 
     const logoutForm = (<form onSubmit={(e) => this.handleLogout(e, this.state)}>
-          <button className="btn-primary" type="submit">Log Out</button>
+          <button className="btn" type="submit">Log Out</button>
           </form>)
 
 
@@ -83,20 +84,20 @@ setUser(user){
     <div className="col-8">{!localStorage.user ? <Login setUser={this.setUser}/> : null}</div>
     <div className="col-2">{localStorage.user ? <p>Welcome, {localStorage.user}!</p> : null}</div>
     <div className="col-2">{localStorage.user ? logoutForm : null}</div>
+    <div className="row"><Nav /></div>
     </div>
     <div className="row">
-    <div className="col-8">{this.state.isLoggedIn === false ? <Register /> : null}</div>
+    <div className="col-8"></div>
     <div className="col-4"></div>
     </div>
     <div className="row"></div>
-    <div className="row"><Nav /></div>
     <div className="row"></div>
     <React.Fragment>
     <Switch>
       <Route path="/articles/edit/drafts/" component={Drafts}/>
       <Route path="/articles/archives/" component={Archives}/>
       <Route path="/articles/" component={Articles} />
-      <Route path="/profiles/" component={Profile}/>
+      <Route path="/profiles/" children={<Profile user={this.state.user}/>}/>
     </Switch>
     </React.Fragment>
     </div>

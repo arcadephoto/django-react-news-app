@@ -104,8 +104,8 @@ handleInput(event){
           <h1>{data.title}</h1>
           <p>By: {data.owner}</p>
           {this.state.edited === false ? <p>{data.body}</p> : <p>{this.state.id.body}</p>}
-          {data.owner === localStorage.user ? <button onClick={() => this.editArticle(data)}>Edit</button> : null}
-          {this.state.isEditing === true & data.owner === localStorage.user & this.state.editWindow === data.id ? <p><textarea className="form-control" rows="5" type="text" name="editText" value={this.state.editText} onChange={this.handleInput}/><button onClick={()=> this.submitEdit(data)}>Submit Edit</button></p> : null}
+          {data.owner === localStorage.user ? <button className="btn" onClick={() => this.editArticle(data)}>Edit</button> : null}
+          {this.state.isEditing === true & data.owner === localStorage.user & this.state.editWindow === data.id ? <p><textarea className="form-control" rows="5" type="text" name="editText" value={this.state.editText} onChange={this.handleInput}/><button className="btn" onClick={()=> this.submitEdit(data)}>Submit Edit</button></p> : null}
           </section>
         ))
 

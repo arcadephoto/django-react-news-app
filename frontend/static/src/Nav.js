@@ -6,7 +6,7 @@ function Nav(props) {
 
 
   return(
-    <div className="navbar">
+    <div className="navlinks navbar">
     <NavLink to="/articles/">Articles</NavLink>
     <NavLink to="/articles/archives/">Archives</NavLink>
     <NavLink to="/articles/edit/drafts/">Drafts</NavLink>

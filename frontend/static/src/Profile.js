@@ -11,12 +11,20 @@ class Profile extends Component {
           email: "",
           password1: "",
           password2: "",
+          data: [],
         }
     this.handleInput = this.handleInput.bind(this);
     this.submitPhoto = this.submitPhoto.bind(this);
     this.handleImage = this.handleImage.bind(this);
     this.editPhoto = this.editPhoto.bind(this);
       }
+
+      componentDidMount(){
+        fetch(`/profiles/detail/`)
+          .then(response => response.json())
+          .then(response => this.setState({data: response}));
+                }
+
 
 handleInput(event){
       this.setState({[event.target.name]: event.target.value});
@@ -80,7 +88,8 @@ await fetch('/profiles/images/', options);
 
 
       render(){
-
+const user =this.state.data
+const profilePhoto = <img width="200px" src={user.profile_picture} alt="pic"/>
 const profileLog = this.state.isLoggedIn === true ? <p>Welcome! Please make a profile to leave a comment.</p>: null
 const photoSubmit = <form onSubmit={this.submitPhoto}>
   <input type="file" name="profile_picture" onChange={this.handleImage}/>
@@ -92,7 +101,8 @@ const photoSubmit = <form onSubmit={this.submitPhoto}>
         return(
           <div>
           {profileLog}
-          {photoSubmit}</div>
+          {photoSubmit}
+          {profilePhoto}</div>
         );
       }
     }

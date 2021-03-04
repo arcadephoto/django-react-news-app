@@ -17,7 +17,8 @@ class ProfileSerializer(serializers.ModelSerializer):
 
 class TokenSerializer(serializers.ModelSerializer):
     username = serializers.ReadOnlyField(source='user.username')
+    id = serializers.ReadOnlyField(source='user.id')
 
     class Meta:
         model = TokenModel
-        fields = ('key', 'username')
+        fields = ('key', 'username', 'id')

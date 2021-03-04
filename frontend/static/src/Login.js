@@ -10,6 +10,7 @@ class Login extends Component {
           username: "",
           email: "",
           password: "",
+          data: [],
         }
     this.handleInput = this.handleInput.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
@@ -32,7 +33,9 @@ class Login extends Component {
     Cookies.set('Authorization', `Token ${data.key}`);
     this.props.setUser(data.username)
     localStorage.setItem("user", data.username)
+    localStorage.setItem("id", data.id)
     this.setState({username: data.username})
+    console.log(data)
     }
   }
 
@@ -44,11 +47,10 @@ class Login extends Component {
 
 
     render(){
-
 const loginForm = (<form onSubmit={(e) => this.handleLogin(e, this.state)}>
       <input type="text" placeholder="username" name="username" value={this.state.username} onChange={this.handleInput}/>
       <input type="password" placeholder="password" name="password" value={this.state.password} onChange={this.handleInput}/>
-      <p><button className="btn btn-primary" type="submit">Log In</button></p>
+      <p><button className="btn" type="submit">Log In</button></p>
       </form>)
 
       return(

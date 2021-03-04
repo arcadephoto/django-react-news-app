@@ -3,28 +3,63 @@
 }
 
 .container{
-  border: 5px solid darkgray;
-  background-color: lightpink;
-  box-shadow: 5px 5px 5px gray;
+  border: 5px solid #FFDAB9;
+  background-image:linear-gradient( white, #fff0f5);
+  box-shadow: 5px 5px 5px #FFDAB9;
+  border-radius: 10px;
+  font-family: Trebuchet, Verdana, sans-serif;
+  min-height: 100vh;
+  padding-bottom: 50px;
 }
 
 .headerbar{
   height: 200px;
   background-image: linear-gradient(firebrick, hotpink);
-  box-shadow: 5px 5px 5px darkgray;
+  box-shadow: 5px 5px 5px #FFDAB9;
+  border-radius: 10px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  transform: translateY(-5px);
 }
 input {
   background: transparent;
   background-color: transparent !important;
-  box-shadow: 3px 3px 3px gray;
+  box-shadow: 3px 3px 3px #FFDAB9;
 
 }
-.card{
-  box-shadow: 3px 3px 3px darkgray;
+section.card{
+  margin: 30px 50px 0px 50px;
+  box-shadow: 10px 10px 10px #FFDAB9;
+  background-color: transparent;
+  border-left: 2px solid #FFDAB9;
+  border-top: 2px solid #FFDAB9;
+  padding-left: 20px;
 }
-/* input:-internal-autofill-selected {
-  background: transparent !important;
-  background-color: transparent !important;
-  color: unset !important;
-
-} */
+.navlinks a{
+  font-size: x-large;
+  color: lightpink;
+  padding-right: 10px;
+  text-shadow: 2px 2px 2px crimson;
+}
+.navlinks{
+  margin-left: 20px;
+}
+.card button{
+  position: absolute;
+  right: 2px;
+  bottom: 2px;
+  width: 80px;
+  background-color: lightpink;
+  color: crimson;
+  text-shadow: 2px 2px 2px hotpink;
+  box-shadow: 3px 3px 3px crimson;
+}
+h1{
+  text-shadow: 2px 2px 2px darkgray;
+}
+.btn{
+  background-color: lightpink;
+  color: crimson;
+  text-shadow: 2px 2px 2px hotpink;
+  box-shadow: 3px 3px 3px crimson;
+}
