@@ -12,27 +12,75 @@ class Articles extends Component {
           editText: "",
           isEditing: false,
           edited: false,
+          submitWindow: false,
+          body: "",
+          title: "",
         }
 
 this.editArticle = this.editArticle.bind(this);
 this.handleInput = this.handleInput.bind(this);
-this.handleEdit = this.handleEdit.bind(this);
-this.finishEdit = this.finishEdit.bind(this);
-
+this.submitEdit = this.submitEdit.bind(this);
+this.saveDraft = this.saveDraft.bind(this);
+this.submitWindow = this.submitWindow.bind(this);
 
 }
+
+submitWindow(){
+  this.setState({submitWindow: true})
+}
+
+
+
+
+async saveDraft(){
+  // e.preventDefault();
+  const post = {body: this.state.body, title: this.state.title}
+  this.setState({submitWindow: false})
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-CSRFToken': Cookies.get('csrftoken'),
+    },
+    body: JSON.stringify(post),
+  };
+  const handleError = (err) => console.warn(err);
+  const response = await fetch(`/articles/edit/drafts/submit/`, options);
+  await response.json().catch(handleError);
+
+}
+
+
+
 
 editArticle(data){
   this.setState({isEditing: true})
   const body = data.body
   this.setState({editText: body})
+
 }
-
-
-finishEdit(data){
-  data.body = this.state.editText
+async submitEdit(edit){
+  // e.preventDefault();
+  edit.body = this.state.editText
   this.setState({isEditing: false})
+  const options = {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-CSRFToken': Cookies.get('csrftoken'),
+    },
+    body: JSON.stringify(edit),
+  };
+  const handleError = (err) => console.warn(err);
+  const response = await fetch(`/articles/edit/${edit.id}/`, options);
+  await response.json().catch(handleError);
+
 }
+
+
+
+
+
 
 componentDidMount(){
   fetch("/articles/")
@@ -45,30 +93,27 @@ handleInput(event){
     }
 
 
-handleEdit(event) {
-if (event.keyCode === 13) {
-  this.setState({text: this.state.editText})
-  this.setState({
-    isEditing: false
-  });
-}
-}
 
       render(){
+        const submitButton = localStorage.user ? <button onClick={this.submitWindow}>Submit An Article!</button> : null
+        const submitWindow = this.state.submitWindow === true ? <p><textarea placeholder="Title your submission" type="text" name="title" value={this.state.title} onChange={this.handleInput}/><textarea className="form-control" rows="5" type="text" name="body" value={this.state.body} onChange={this.handleInput}/><button onClick={this.saveDraft}>Save Draft</button></p> : null
         const content = this.state.data.map((data) => (
           <section className="card" key={data.id}>
           <h1>{data.title}</h1>
           <p>By: {data.owner}</p>
           {this.state.edited === false ? <p>{data.body}</p> : <p>{this.state.id.body}</p>}
           {data.owner === localStorage.user ? <button onClick={() => this.editArticle(data)}>Edit</button> : null}
-          {this.state.isEditing === true & data.owner === localStorage.user ? <p><textarea className="form-control" rows="5" type="text" name="editText" value={this.state.editText} onChange={this.handleInput}/><button onClick={()=> this.finishEdit(data)}>Finish Edit</button></p> : null}
+          {this.state.isEditing === true & data.owner === localStorage.user ? <p><textarea className="form-control" rows="5" type="text" name="editText" value={this.state.editText} onChange={this.handleInput}/><button onClick={()=> this.submitEdit(data)}>Submit Edit</button></p> : null}
           </section>
         ))
 
 
 
         return(
-          <div>{content}
+          <div>
+          {submitButton}
+          {submitWindow}
+          {content}
               </div>
         );
         }
