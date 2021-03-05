@@ -97,7 +97,6 @@ handleInput(event){
 
 
       render(){
-        const submitButton = localStorage.user ? <button onClick={this.submitWindow}>Submit An Article!</button> : null
         const submitWindow = this.state.submitWindow === true ? <p><textarea placeholder="Title your submission" type="text" name="title" value={this.state.title} onChange={this.handleInput}/><textarea className="form-control" rows="5" type="text" name="body" value={this.state.body} onChange={this.handleInput}/><button onClick={this.saveDraft}>Save Draft</button></p> : null
         const content = this.state.data.map((data) => (
           <section className="card" key={data.id}>
@@ -113,7 +112,6 @@ handleInput(event){
 
         return(
           <div>
-          {submitButton}
           {submitWindow}
           {content}
               </div>

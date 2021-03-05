@@ -89,8 +89,9 @@ await fetch('/profiles/images/', options);
 
       render(){
 const user =this.state.data
+const name = this.state.data.username
 const profilePhoto = <img width="200px" src={user.profile_picture} alt="pic"/>
-const profileLog = this.state.isLoggedIn === true ? <p>Welcome! Please make a profile to leave a comment.</p>: null
+const profileLog = localStorage.user ? <p>Welcome! Upload an image to create a profile, or update your current photo.</p>: null
 const photoSubmit = <form onSubmit={this.submitPhoto}>
   <input type="file" name="profile_picture" onChange={this.handleImage}/>
 {this.state.profile_picture && <img width="500" src={this.state.preview} alt="preview" />}
@@ -99,10 +100,15 @@ const photoSubmit = <form onSubmit={this.submitPhoto}>
 </form>
 
         return(
-          <div>
-          {profileLog}
-          {photoSubmit}
-          {profilePhoto}</div>
+          <div className="row">
+          <div className="col-3 profileBar"><h3>{name}</h3>
+          <p>{profilePhoto}</p>
+          </div>
+          <div className="col-3 profileSubBar">
+          <div>{profileLog}</div>
+          <div>{photoSubmit}</div>
+          </div>
+          </div>
         );
       }
     }

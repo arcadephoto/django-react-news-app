@@ -14,7 +14,15 @@ class Login extends Component {
         }
     this.handleInput = this.handleInput.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
+    this.reset = this.reset.bind(this);
       }
+
+reset(){
+  this.setState({username: ""})
+  this.setState({password: ""})
+  window.location.reload();
+}
+
 
   async handleLogin(e, obj){
     e.preventDefault();
@@ -34,10 +42,10 @@ class Login extends Component {
     this.props.setUser(data.username)
     localStorage.setItem("user", data.username)
     localStorage.setItem("id", data.id)
-    this.setState({username: data.username})
-    console.log(data)
+    this.reset();
     }
   }
+
 
 
 

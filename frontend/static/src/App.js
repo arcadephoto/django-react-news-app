@@ -28,6 +28,8 @@ class App extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
     this.setUser = this.setUser.bind(this);
+    this.showSubmitWindow = this.showSubmitWindow.bind(this);
+    this.saveDraft = this.saveDraft.bind(this);
       }
 
 
@@ -41,9 +43,27 @@ class App extends Component {
         this.setState({[event.target.name]: event.target.value});
       }
 
+  showSubmitWindow(){
+    this.setState({submitWindow: true})
+      }
 
+      async saveDraft(){
+        // e.preventDefault();
+        const post = {body: this.state.body, title: this.state.title}
+        this.setState({submitWindow: false})
+        const options = {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': Cookies.get('csrftoken'),
+          },
+          body: JSON.stringify(post),
+        };
+        const handleError = (err) => console.warn(err);
+        const response = await fetch(`/articles/edit/drafts/submit/`, options);
+        await response.json().catch(handleError);
 
-
+      }
 
 
     async handleLogout(e, obj){
@@ -70,7 +90,8 @@ setUser(user){
 
   render(){
 
-
+    const submitButton = localStorage.user ? <button className="btn" onClick={this.showSubmitWindow}>Submit "News"</button> : null
+const submitWindow = this.state.submitWindow === true ? <p><textarea placeholder="Title your submission" type="text" name="title" value={this.state.title} onChange={this.handleInput}/><textarea className="form-control" rows="5" type="text" name="body" value={this.state.body} onChange={this.handleInput}/><button className="btn" onClick={this.saveDraft}>Save Draft</button></p> : null
     const logoutForm = (<form onSubmit={(e) => this.handleLogout(e, this.state)}>
           <button className="btn" type="submit">Log Out</button>
           </form>)
@@ -82,7 +103,7 @@ setUser(user){
     <div className="container">
     <div className="row headerbar">
     <div className="col-8">{!localStorage.user ? <Login setUser={this.setUser}/> : null}</div>
-    <div className="col-2">{localStorage.user ? <p>Welcome, {localStorage.user}!</p> : null}</div>
+    <div className="col-2">{localStorage.user ? <p>Welcome, {localStorage.user}!</p> : null}{submitButton}</div>
     <div className="col-2">{localStorage.user ? logoutForm : null}</div>
     <div className="row"><Nav /></div>
     </div>
@@ -91,12 +112,12 @@ setUser(user){
     <div className="col-4"></div>
     </div>
     <div className="row"></div>
-    <div className="row"></div>
+    <div className="row">{submitWindow}</div>
     <React.Fragment>
     <Switch>
       <Route path="/articles/edit/drafts/" component={Drafts}/>
       <Route path="/articles/archives/" component={Archives}/>
-      <Route path="/articles/" component={Articles} />
+      <Route path="/articles/" children={<Articles showSubmitWindow={this.showSubmitWindow} submitWindow={this.state.submitWindow}/>} />
       <Route path="/profiles/" children={<Profile user={this.state.user}/>}/>
     </Switch>
     </React.Fragment>

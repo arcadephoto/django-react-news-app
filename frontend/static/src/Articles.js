@@ -22,14 +22,8 @@ this.editArticle = this.editArticle.bind(this);
 this.handleInput = this.handleInput.bind(this);
 this.submitEdit = this.submitEdit.bind(this);
 this.saveDraft = this.saveDraft.bind(this);
-this.submitWindow = this.submitWindow.bind(this);
 
 }
-
-submitWindow(){
-  this.setState({submitWindow: true})
-}
-
 
 
 
@@ -97,8 +91,8 @@ handleInput(event){
 
 
       render(){
-        const submitButton = localStorage.user ? <button onClick={this.submitWindow}>Submit An Article!</button> : null
-        const submitWindow = this.state.submitWindow === true ? <p><textarea placeholder="Title your submission" type="text" name="title" value={this.state.title} onChange={this.handleInput}/><textarea className="form-control" rows="5" type="text" name="body" value={this.state.body} onChange={this.handleInput}/><button className="btn" onClick={this.saveDraft}>Save Draft</button></p> : null
+
+
         const content = this.state.data.map((data) => (
           <section className="card" key={data.id}>
           <h1>{data.title}</h1>
@@ -113,8 +107,7 @@ handleInput(event){
 
         return(
           <div>
-          {submitButton}
-          {submitWindow}
+      
           {content}
               </div>
         );
