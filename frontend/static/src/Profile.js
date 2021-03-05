@@ -103,7 +103,7 @@ const photoSubmit = <form onSubmit={this.submitPhoto}>
         return(
           <div className="row">
           <div className="col-3 profileBar"><h3>{name}</h3>
-          <p>{profilePhoto}</p>
+          {profilePhoto}
           </div>
           <div className="col-3 profileSubBar">
           <div>{profileLog}</div>

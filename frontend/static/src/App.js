@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import {Route, Switch} from 'react-router-dom';
 import Cookies from 'js-cookie';
-import Register from './Register';
 import Login from './Login';
 import Profile from './Profile';
 import Articles from './Articles';
@@ -16,6 +15,7 @@ class App extends Component {
   constructor (props){
         super(props);
         this.state = {
+          frontPage: true,
           isLoggedIn: !!Cookies.get('Authorization'),
           username: "",
           email: "",
@@ -94,31 +94,29 @@ setUser(user){
 
     const submitButton = localStorage.user ? <button className="btn submitNewsButton" onClick={this.showSubmitWindow}>Submit "News"</button> : null
 const submitWindow = this.state.submitWindow === true ? <p><textarea placeholder="Title your submission" type="text" name="title" value={this.state.title} onChange={this.handleInput}/><textarea className="form-control" rows="5" type="text" name="body" value={this.state.body} onChange={this.handleInput}/><button className="btn" onClick={this.saveDraft}>Save Draft</button></p> : null
-    const logoutForm = (<form onSubmit={(e) => this.handleLogout(e, this.state)}>
-          <button className="btn" type="submit">Log Out</button>
-          </form>)
+    // const logoutForm = (<form onSubmit={(e) => this.handleLogout(e, this.state)}>
+    //       <button className="btn" type="submit">Log Out</button>
+    //       </form>)
 
 
 
       return (
 
     <div className="container">
-    <div className="row headerbar">{submitButton}
-    <div className="col-8"><img className="logo" src={logo}/></div>
-    <div className="col-2">{localStorage.user ? <p>Welcome, {localStorage.user}!</p> : null}<p className="logLine">Real, truthfully factual information from professional newsologists!</p></div>
-    <div className="col-2"><p className="loginButton">{localStorage.user ? logoutForm : null}</p>{!localStorage.user ? <Login setUser={this.setUser}/> : null}</div>
+    <div className="row headerbar sticky-top">{submitButton}
+    <div className="col-sm-8"><img className="logo w-75" src={logo} alt="logo"/></div>
+    <div className="col-sm-2">{localStorage.user ? <p>Welcome, {localStorage.user}!</p> : null}<p className="logLine d-none d-md-block">Real, truthfully factual information from professional newsologists!</p></div>
+    <div className="col-sm-2"><div className="loginButton"></div>{!localStorage.user ? <Login setUser={this.setUser}/> : null}</div>
     <div className="row"><Nav isLoggedIn={this.state.isLoggedIn}/></div>
     </div>
-    <div className="row">
-    <div className="col-8"></div>
-    <div className="col-4"></div>
-    </div>
+
+
     <div className="row"></div>
     <div className="row">{submitWindow}</div>
     <React.Fragment>
     <Switch>
       <Route path="/articles/edit/drafts/" component={Drafts}/>
-      <Route path="/articles/archives/" component={Archives}/>
+      <Route path="/articles/archives/" children={<Archives className="mainArchive"/>}/>
       <Route path="/articles/" children={<Articles showSubmitWindow={this.showSubmitWindow} submitWindow={this.state.submitWindow}/>} />
       <Route path="/profiles/" children={<Profile user={this.state.user}/>}/>
     </Switch>

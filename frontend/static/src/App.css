@@ -1,6 +1,4 @@
-.App {
-  text-align: center;
-}
+
 
 .container{
   border: 5px solid pink;
@@ -79,7 +77,6 @@ h1{
   position: absolute;
   transform:translateY(-10px);
   left: 80px;
-  width: 600px;
 }
 
 .profileSubBar{
@@ -108,4 +105,27 @@ h1{
 .registerBar{
   text-align: center;
   padding-top: 150px;
+}
+.frontArchive{
+font-size: large;
+}
+.archiveColumn{
+  text-shadow: 2px 2px 2px lightpink;
+  padding-top: 20px;
+  text-align: center;
+  padding-bottom: 20px;
+}
+.archiveColumn h1{
+  padding-top: 20px;
+  padding-right:20px;
+  font-size: large;
+  padding-bottom: 20px;
+}
+.archiveColumn p{
+  /* padding-right: 20px;
+  text-shadow: none; */
+  display: none;
+}
+.archivePhotos{
+  padding-right: 20px;
 }

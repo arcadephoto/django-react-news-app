@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import Cookies from 'js-cookie'
+import Archives from './Archives'
 import './App.css';
 
 class Articles extends Component {
@@ -106,9 +107,14 @@ handleInput(event){
 
 
         return(
-          <div>
-      
+          <div className="row">
+          <div className="col col-xxl-auto">
           {content}
+          </div>
+          <div className="col-4 archiveColumn d-none d-md-block">
+          <h4>From the Archives of Truth:</h4>
+          <Archives className="frontArchive"/>
+          </div>
               </div>
         );
         }

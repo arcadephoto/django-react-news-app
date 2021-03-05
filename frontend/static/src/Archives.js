@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import Cookies from 'js-cookie'
+import bottles from './bottles.png'
 import './App.css';
 
 class Archives extends Component {
@@ -22,6 +23,7 @@ class Archives extends Component {
   render(){
     const content = this.state.data.map((data) => (
       <section className="card" key={data.id}>
+      <img className="archivePhotos" src={bottles} alt="bottles" />
       <h1>{data.title}</h1>
       <p>By: {data.owner}</p>
       <p>{data.body}</p>
