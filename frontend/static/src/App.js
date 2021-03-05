@@ -8,6 +8,7 @@ import Articles from './Articles';
 import Nav from './Nav';
 import Drafts from './Drafts';
 import Archives from './Archives';
+import logo from './truth2.png'
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -82,6 +83,7 @@ class App extends Component {
     Cookies.remove('Authorization', `Token ${data.key}`);
     localStorage.clear()
     this.setState({username: ""})
+    window.location.reload()
     }
 
 setUser(user){
@@ -90,7 +92,7 @@ setUser(user){
 
   render(){
 
-    const submitButton = localStorage.user ? <button className="btn" onClick={this.showSubmitWindow}>Submit "News"</button> : null
+    const submitButton = localStorage.user ? <button className="btn submitNewsButton" onClick={this.showSubmitWindow}>Submit "News"</button> : null
 const submitWindow = this.state.submitWindow === true ? <p><textarea placeholder="Title your submission" type="text" name="title" value={this.state.title} onChange={this.handleInput}/><textarea className="form-control" rows="5" type="text" name="body" value={this.state.body} onChange={this.handleInput}/><button className="btn" onClick={this.saveDraft}>Save Draft</button></p> : null
     const logoutForm = (<form onSubmit={(e) => this.handleLogout(e, this.state)}>
           <button className="btn" type="submit">Log Out</button>
@@ -101,11 +103,11 @@ const submitWindow = this.state.submitWindow === true ? <p><textarea placeholder
       return (
 
     <div className="container">
-    <div className="row headerbar">
-    <div className="col-8">{!localStorage.user ? <Login setUser={this.setUser}/> : null}</div>
-    <div className="col-2">{localStorage.user ? <p>Welcome, {localStorage.user}!</p> : null}{submitButton}</div>
-    <div className="col-2">{localStorage.user ? logoutForm : null}</div>
-    <div className="row"><Nav /></div>
+    <div className="row headerbar">{submitButton}
+    <div className="col-8"><img className="logo" src={logo}/></div>
+    <div className="col-2">{localStorage.user ? <p>Welcome, {localStorage.user}!</p> : null}<p className="logLine">Real, truthfully factual information from professional newsologists!</p></div>
+    <div className="col-2"><p className="loginButton">{localStorage.user ? logoutForm : null}</p>{!localStorage.user ? <Login setUser={this.setUser}/> : null}</div>
+    <div className="row"><Nav isLoggedIn={this.state.isLoggedIn}/></div>
     </div>
     <div className="row">
     <div className="col-8"></div>

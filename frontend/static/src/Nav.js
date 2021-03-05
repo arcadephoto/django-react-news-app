@@ -1,18 +1,24 @@
 import {NavLink} from 'react-router-dom';
+import React, {Component} from 'react';
 
 
+class Nav extends Component {
+  constructor (props){
+        super(props);
+        this.state = {
 
-function Nav(props) {
-
+        }
+      }
+        render(){
 
   return(
     <div className="navlinks navbar">
     <NavLink to="/articles/">Articles</NavLink>
     <NavLink to="/articles/archives/">Archives</NavLink>
-    <NavLink to="/articles/edit/drafts/">Drafts</NavLink>
-    <NavLink to="/profiles/">Profile</NavLink>
+    {this.props.isLoggedIn === true ? <NavLink to="/articles/edit/drafts/">Drafts</NavLink> : null}
+    {this.props.isLoggedIn === true ? <NavLink to="/profiles/">Profile</NavLink> : null}
     </div>
   );
 }
-
+}
 export default Nav;

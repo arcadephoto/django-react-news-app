@@ -3,9 +3,9 @@
 }
 
 .container{
-  border: 5px solid #FFDAB9;
+  border: 5px solid pink;
   background-image:linear-gradient( white, #fff0f5);
-  box-shadow: 5px 5px 5px #FFDAB9;
+  box-shadow: 5px 5px 5px lightpink;
   border-radius: 10px;
   font-family: Trebuchet, Verdana, sans-serif;
   min-height: 100vh;
@@ -15,24 +15,24 @@
 .headerbar{
   height: 200px;
   background-image: linear-gradient(firebrick, hotpink);
-  box-shadow: 5px 5px 5px #FFDAB9;
+  box-shadow: 5px 5px 5px lightpink;
   border-radius: 10px;
   border-bottom-left-radius: 0px;
   border-bottom-right-radius: 0px;
   transform: translateY(-5px);
 }
 input {
-  background: transparent;
-  background-color: transparent !important;
-  box-shadow: 3px 3px 3px #FFDAB9;
+  /* background: transparent;
+  background-color: transparent !important; */
+  box-shadow: 3px 3px 3px lightpink;
 
 }
 section.card{
   margin: 30px 50px 0px 50px;
-  box-shadow: 10px 10px 10px #FFDAB9;
+  box-shadow: 10px 10px 10px lightpink;
   background-color: transparent;
-  border-left: 2px solid #FFDAB9;
-  border-top: 2px solid #FFDAB9;
+  border-left: 2px solid pink;
+  border-top: 2px solid pink;
   padding-left: 20px;
 }
 .navlinks a{
@@ -72,13 +72,40 @@ h1{
   text-align: center;
   background-image: linear-gradient(firebrick, hotpink);
   height: 100vh;
-  box-shadow: 5px 5px 5px lightpink;
+  box-shadow: 5px 5px 5px lightgray;
+  border-radius: 5px;
 }
-img {
-  box-shadow: 5px 5px 5px lightpink;
+.logo{
+  position: absolute;
+  transform:translateY(-10px);
+  left: 80px;
+  width: 600px;
 }
 
 .profileSubBar{
-  padding-top: 75px;
+  padding-top: 150px;
   text-align: center;
+}
+
+.submitNewsButton{
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+}
+
+.input-group{
+  background-color: transparent;
+}
+.loginButton{
+  transform:translateX(60px);
+}
+.logLine{
+  color: white;
+  position: absolute;
+  top: 60px;
+  text-shadow: 2px 2px 2px crimson;
+}
+.registerBar{
+  text-align: center;
+  padding-top: 150px;
 }

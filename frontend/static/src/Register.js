@@ -45,15 +45,16 @@ class Register extends Component {
       render(){
 
   const registerForm = (<form onSubmit={(e) => this.handleRegistration(e, this.state)}>
-        <input type="text" placeholder="username" name="username" value={this.state.username} onChange={this.handleInput}/>
-        <input type="email" placeholder="email" name="email" value={this.state.email} onChange={this.handleInput}/>
-        <input type="password" placeholder="password" name="password1" value={this.state.password1} onChange={this.handleInput}/>
-        <input type="password" placeholder="confirm pass" name="password2" value={this.state.password2} onChange={this.handleInput}/>
+        <input className="input-group form-control" type="text" placeholder="username" name="username" value={this.state.username} onChange={this.handleInput}/>
+        <input className="input-group form-control" type="email" placeholder="email" name="email" value={this.state.email} onChange={this.handleInput}/>
+        <input className="input-group form-control" type="password" placeholder="password" name="password1" value={this.state.password1} onChange={this.handleInput}/>
+        <input className="input-group form-control" type="password" placeholder="confirm pass" name="password2" value={this.state.password2} onChange={this.handleInput}/>
         <p><button className="btn" type="submit">Register</button></p>
         </form>)
 
         return(
           <div>
+          Do you like "truth?" Then you should register!
           {registerForm}
           </div>
         );

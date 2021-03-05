@@ -56,8 +56,8 @@ reset(){
 
     render(){
 const loginForm = (<form onSubmit={(e) => this.handleLogin(e, this.state)}>
-      <input type="text" placeholder="username" name="username" value={this.state.username} onChange={this.handleInput}/>
-      <input type="password" placeholder="password" name="password" value={this.state.password} onChange={this.handleInput}/>
+      <input className="input-group" type="text" placeholder="username" name="username" value={this.state.username} onChange={this.handleInput}/>
+      <input className="input-group" type="password" placeholder="password" name="password" value={this.state.password} onChange={this.handleInput}/>
       <p><button className="btn" type="submit">Log In</button></p>
       </form>)
 

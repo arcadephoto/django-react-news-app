@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import Cookies from 'js-cookie'
+import Register from './Register'
 import './App.css';
 
 class Profile extends Component {
@@ -90,13 +91,13 @@ await fetch('/profiles/images/', options);
       render(){
 const user =this.state.data
 const name = this.state.data.username
-const profilePhoto = <img width="200px" src={user.profile_picture} alt="pic"/>
-const profileLog = localStorage.user ? <p>Welcome! Upload an image to create a profile, or update your current photo.</p>: null
+const profilePhoto = name ? <img width="200px" src={user?.profile_picture} alt="pic"/> : <p>If you don't create a profile, who else is going to spread the truth about vaccines? Log in to create a profile!</p>
+const profileLog = name ? <p>Update your photo!</p>: <p>Submit a photo to create a profile.</p>
 const photoSubmit = <form onSubmit={this.submitPhoto}>
   <input type="file" name="profile_picture" onChange={this.handleImage}/>
 {this.state.profile_picture && <img width="500" src={this.state.preview} alt="preview" />}
-<button type="submit">Save</button>
-{localStorage.user === this.props.username ? <button onClick={this.editPhoto}>Edit</button> : null}
+<button className="btn" type="submit">Save</button>
+{localStorage.user === this.state.data.username ? <button className="btn" onClick={this.editPhoto}>Edit</button> : null}
 </form>
 
         return(
@@ -108,6 +109,8 @@ const photoSubmit = <form onSubmit={this.submitPhoto}>
           <div>{profileLog}</div>
           <div>{photoSubmit}</div>
           </div>
+          <div className="col-2"></div>
+          {this.state.isLoggedIn === false ? <div className="col-4 registerBar"><Register /></div> : null}
           </div>
         );
       }
