@@ -92,11 +92,11 @@ setUser(user){
 
   render(){
 
-    const submitButton = localStorage.user ? <button className="btn submitNewsButton" onClick={this.showSubmitWindow}>Submit "News"</button> : null
+    const submitButton = localStorage.user ? <button className="btn submitNewsButton" onClick={this.showSubmitWindow}>Submit</button> : null
 const submitWindow = this.state.submitWindow === true ? <p><textarea placeholder="Title your submission" type="text" name="title" value={this.state.title} onChange={this.handleInput}/><textarea className="form-control" rows="5" type="text" name="body" value={this.state.body} onChange={this.handleInput}/><button className="btn" onClick={this.saveDraft}>Save Draft</button></p> : null
-    // const logoutForm = (<form onSubmit={(e) => this.handleLogout(e, this.state)}>
-    //       <button className="btn" type="submit">Log Out</button>
-    //       </form>)
+    const logoutForm = this.state.isLoggedIn ? (<form onSubmit={(e) => this.handleLogout(e, this.state)}>
+          <button className="btn" type="submit">Log Out</button>
+          </form>) : null
 
 
 
@@ -106,7 +106,7 @@ const submitWindow = this.state.submitWindow === true ? <p><textarea placeholder
     <div className="row headerbar sticky-top">{submitButton}
     <div className="col-sm-8"><img className="logo w-75" src={logo} alt="logo"/></div>
     <div className="col-sm-2">{localStorage.user ? <p>Welcome, {localStorage.user}!</p> : null}<p className="logLine d-none d-md-block">Real, truthfully factual information from professional newsologists!</p></div>
-    <div className="col-sm-2"><div className="loginButton"></div>{!localStorage.user ? <Login setUser={this.setUser}/> : null}</div>
+    <div className="col-sm-2"><div className="loginButton"></div>{!localStorage.user ? <Login setUser={this.setUser}/> : null}{logoutForm}</div>
     <div className="row"><Nav isLoggedIn={this.state.isLoggedIn}/></div>
     </div>
 

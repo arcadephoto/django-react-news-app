@@ -20,11 +20,15 @@ class Archives extends Component {
             }
 
 
+displayArticle(data){
+  alert(data.body)
+}
+
   render(){
     const content = this.state.data.map((data) => (
       <section className="card" key={data.id}>
-      <img className="archivePhotos" src={bottles} alt="bottles" />
-      <h1>{data.title}</h1>
+      <img className="card-img-top archivePhotos" src={bottles} alt="bottles" />
+      <h1><a href="./archives/">{data.title}</a></h1>
       <p>By: {data.owner}</p>
       <p>{data.body}</p>
       </section>
