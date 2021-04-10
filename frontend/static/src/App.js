@@ -117,7 +117,7 @@ const submitWindow = this.state.submitWindow === true ? <p><textarea placeholder
     <Switch>
       <Route path="/articles/edit/drafts/" component={Drafts}/>
       <Route path="/articles/archives/" children={<Archives className="mainArchive"/>}/>
-      <Route path="/articles/" children={<Articles showSubmitWindow={this.showSubmitWindow} submitWindow={this.state.submitWindow}/>} />
+      <Route path="/main/" children={<Articles showSubmitWindow={this.showSubmitWindow} submitWindow={this.state.submitWindow}/>} />
       <Route path="/profiles/" children={<Profile user={this.state.user}/>}/>
     </Switch>
     </React.Fragment>
