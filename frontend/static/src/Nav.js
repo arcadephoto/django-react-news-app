@@ -13,7 +13,7 @@ class Nav extends Component {
 
   return(
     <div className="navlinks navbar">
-    <NavLink to="/main/">Articles</NavLink>
+    <NavLink to="/">Articles</NavLink>
     <NavLink to="/articles/archives/">Archives</NavLink>
     {this.props.isLoggedIn === true ? <NavLink to="/articles/edit/drafts/">Drafts</NavLink> : null}
     {this.props.isLoggedIn === true ? <NavLink to="/profiles/">Profile</NavLink> : null}
