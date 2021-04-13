@@ -102,7 +102,7 @@ const submitWindow = this.state.submitWindow === true ? <p><textarea placeholder
 
       return (
 
-    <div className="container">
+    <div className="container-fluid">
     <div className="row headerbar sticky-top">{submitButton}
     <div className="col-sm-8"><img className="logo w-75" src={logo} alt="logo"/></div>
     <div className="col-sm-2">{localStorage.user ? <p>Welcome, {localStorage.user}!</p> : null}<p className="logLine d-none d-md-block">Real, truthfully factual information from professional newsologists!</p></div>

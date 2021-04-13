@@ -108,7 +108,7 @@ handleInput(event){
 
         return(
           <div className="row">
-          <div className="col g-0 col-xxl-auto">
+          <div className="col g-0 col-xxl-auto artCol">
           {content}
           </div>
           <div className="col-4 archiveColumn d-none d-md-block">

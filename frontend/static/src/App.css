@@ -1,6 +1,6 @@
 
 
-.container{
+.container-fluid{
   border: 5px solid pink;
   background-image:linear-gradient( white, #fff0f5);
   box-shadow: 5px 5px 5px lightpink;
@@ -138,3 +138,32 @@ font-size: large;
   text-decoration: none;
   color: crimson;
 }
+
+@media (max-width: 600px) and (orientation: portrait){
+
+.card{
+  min-width: 100vw;
+}
+.card h1 {
+  font-size: x-large;
+}
+section.card{
+  margin: 10px 0 10px 0;
+}
+
+input.input-group{
+  width: 40%;
+  margin-left: 50%;
+}
+img.logo.w-75{
+  margin-top: 25%;
+}
+button.btn{
+  position: absolute;
+  top: 0%;
+}
+.navlinks a {
+  font-size: large;
+}
+}
+
